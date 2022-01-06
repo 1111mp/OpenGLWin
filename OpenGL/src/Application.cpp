@@ -13,6 +13,7 @@ static unsigned int CompileShader(unsigned int type, const std::string& source)
 {
   unsigned int id = glCreateShader(type);
   const char* src = source.c_str();
+
   glShaderSource(id, 1, &src, nullptr);
   glCompileShader(id);
 
@@ -50,6 +51,21 @@ static int CreateShader(const std::string& vertexShader, const std::string& frag
 
   glDeleteShader(vertex);
   glDeleteShader(fragment);
+
+  int result;
+  glGetProgramiv(program, GL_COMPILE_STATUS, &result);
+  if (!result) {
+    int length;
+    glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length);
+    char* message = (char*)alloca(length * sizeof(char));
+    glGetProgramInfoLog(program, length, &length, message);
+
+    std::cout << "ERROR::SHADER::PROGRAM::COMPILATION_FAILED\n" << message << std::endl;
+
+    glDeleteProgram(program);
+
+    return 0;
+  }
 
   return program;
 }
@@ -102,7 +118,7 @@ int main(void)
     "\n"
     "layout(location = 0) in vec4 position;\n"
     "\n"
-    "void mian()\n"
+    "void main()\n"
     "{\n"
     "  gl_Position = position;\n"
     "}\n";
@@ -112,7 +128,7 @@ int main(void)
     "\n"
     "layout(location = 0) out vec4 color;\n"
     "\n"
-    "void mian()\n"
+    "void main()\n"
     "{\n"
     "  color = vec4(1.0, 0.0, 0.0, 1.0);\n"
     "}\n";
