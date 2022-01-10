@@ -23,6 +23,8 @@ public:
   void Bind() const;
   void UnBind() const;
 
+  void SetUniform1i(const std::string& name, int value);
+  void SetUniform1f(const std::string& name, float value);
   // set uniform
   void SetUniform4f(const std::string& name, float x, float y, float z, float w);
  

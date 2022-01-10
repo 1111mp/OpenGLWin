@@ -4,9 +4,11 @@
 #include <iostream>
 
 #include "VertexBuffer.h"
+#include "VertexBufferLayout.h"
 #include "IndexBuffer.h"
 #include "VertexArray.h"
 #include "Shader.h"
+#include "Texture.h"
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) 
 {
@@ -57,11 +59,11 @@ int main(void)
     //  -0.5f,  0.5f, 1.0f, 1.0f, 1.0f  // 3
     //};
     float positions[] = {
-      // position
-      -0.5f, -0.5f,
-       0.5f, -0.5f,
-       0.5f,  0.5f,
-      -0.5f,  0.5f,
+      // position   // texture
+      -0.5f, -0.5f, 0.0f, 0.0f,
+       0.5f, -0.5f, 1.0f, 0.0f,
+       0.5f,  0.5f, 1.0f, 1.0f,
+      -0.5f,  0.5f, 0.0f, 1.0f
     };
 
     unsigned int indices[] = {
@@ -70,10 +72,10 @@ int main(void)
     };
 
     VertexArray va;
-    VertexBuffer vb(positions, 4 * 5 * sizeof(float));
+    VertexBuffer vb(positions, 4 * 4 * sizeof(float));
     VertexBufferLayout layout;
     layout.Push<float>(2);
-    //layout.Push<float>(3);
+    layout.Push<float>(2);
     va.AddBuffer(vb, layout);
 
     IndexBuffer ib(indices, 6);
@@ -85,23 +87,31 @@ int main(void)
     float r = 0.0f;
     float increment = 0.05f;
 
+    Texture texture("resource/textures/container.jpg");
+    //Texture texture_other("resource/textures/ChernoLogo.png");
+    texture.Bind();
+    //texture_other.Bind(1);
+    shader.SetUniform1i("u_Texture", 0);
+    //shader.SetUniform1i("u_Texture_other", 1);
+
     va.UnBind();
     vb.UnBind();
     ib.UnBind();
     shader.UnBind();
+
+    Renderer renderer;
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
       /* Render here */
       //glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-      glClear(GL_COLOR_BUFFER_BIT);
+      renderer.Clear();
 
       shader.Bind();
-      va.Bind();
       shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
-      glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
-      va.UnBind();
+
+      renderer.Draw(va, ib);
 
       if (r > 1.0f)
         increment = -0.05f;
