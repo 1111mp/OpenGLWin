@@ -6,9 +6,11 @@ layout(location = 1) in vec2 texCoord;
 
 out vec2 v_Textcoord;
 
+uniform mat4 u_Transform;
+
 void main()
 {
-  gl_Position = position;
+  gl_Position = u_Transform * position;
   v_Textcoord = texCoord;
 };
 
@@ -19,11 +21,11 @@ in vec2 v_Textcoord;
 
 out vec4 color;
 
-uniform vec4 u_Color;
+//uniform vec4 u_Color;
 uniform sampler2D u_Texture;
 uniform sampler2D u_Texture_other;
 
 void main()
 {
-  color = texture(u_Texture, v_Textcoord) * u_Color;
+  color = mix(texture(u_Texture, v_Textcoord), texture(u_Texture_other, v_Textcoord), 0.2f);
 };
