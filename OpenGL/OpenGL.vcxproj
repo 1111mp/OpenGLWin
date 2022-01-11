@@ -597,6 +597,7 @@
     <ClInclude Include="src\VertexBufferLayout.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="resource\textures\awesomeface.png" />
     <Image Include="resource\textures\ChernoLogo.png" />
     <Image Include="resource\textures\container.jpg" />
   </ItemGroup>
