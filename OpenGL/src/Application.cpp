@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+Ôªø#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
 #include <iostream>
@@ -60,13 +60,13 @@ int main(void)
 	glfwSetKeyCallback(window, key_callback);
 
 	{
-		glEnable(GL_DEPTH_TEST);
+		//glEnable(GL_DEPTH_TEST);
 
-		// ªÏ∫œ https://learnopengl-cn.readthedocs.io/zh/latest/04%20Advanced%20OpenGL/03%20Blending/
+		// Ê∑∑Âêà https://learnopengl-cn.readthedocs.io/zh/latest/04%20Advanced%20OpenGL/03%20Blending/
 		GLCall(glEnable(GL_BLEND));
 		GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
-		Renderer renderer;
+		//Renderer renderer;
 
 		const char* glsl_version = "#version 130";
 
@@ -89,9 +89,9 @@ int main(void)
 		while (!glfwWindowShouldClose(window))
 		{
       /* Render here */
+      //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
       GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
-
-			renderer.Clear();
+			GLCall(glClear(GL_COLOR_BUFFER_BIT));
 
       ImGui_ImplOpenGL3_NewFrame();
 			ImGui_ImplGlfw_NewFrame();

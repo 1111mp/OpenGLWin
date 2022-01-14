@@ -5,7 +5,7 @@
 namespace test {
 
   TestTexture2D::TestTexture2D()
-    : m_Translation(200.0f, 200.0f, 0.0f), m_Proj(glm::ortho(0.0f, 960.0f, 0.0f, 600.0f, -1.0f, 1.0f))
+    : m_Proj(glm::ortho(0.0f, 960.0f, 0.0f, 600.0f, -1.0f, 1.0f)), m_Translation(200.0f, 200.0f, 0.0f)
   {
     float positions[] = {
       // position   // texture
