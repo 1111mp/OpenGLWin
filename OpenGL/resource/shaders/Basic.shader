@@ -12,7 +12,7 @@ void main()
 {
   gl_Position = u_Transform * position;
   v_Textcoord = texCoord;
-};
+}
 
 #shader fragment
 #version 330 core
@@ -28,4 +28,4 @@ uniform sampler2D u_Texture;
 void main()
 {
   color = texture(u_Texture, v_Textcoord);
-};
+}

@@ -26,8 +26,8 @@ Texture::Texture(const std::string& path)
   // 解绑纹理对象
   GLCall(glBindTexture(GL_TEXTURE_2D, 0));
 
-  if (m_LocalBuffer)
-    stbi_image_free(m_LocalBuffer);
+  //if (m_LocalBuffer)
+    //stbi_image_free(m_LocalBuffer);
 }
 
 Texture::~Texture()

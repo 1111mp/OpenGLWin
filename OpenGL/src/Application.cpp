@@ -18,6 +18,7 @@
 #include "imgui/imgui_impl_opengl3.h"
 
 #include "test/TestClearColor.h"
+#include "test/TestTexture2D.h"
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) 
 {
@@ -82,16 +83,13 @@ int main(void)
     currentTest = testMenu;
 
 		testMenu->RegisterTest<test::TestClearColor>("Clear Color");
-
-    //test::TestClearColor test;
+    testMenu->RegisterTest<test::TestTexture2D>("2D Texture");
 
 		/* Loop until the user closes the window */
 		while (!glfwWindowShouldClose(window))
 		{
       /* Render here */
       GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
-			//test.OnUpdate(1.0f);
-			//test.OnRender();
 
 			renderer.Clear();
 
