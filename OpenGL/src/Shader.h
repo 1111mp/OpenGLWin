@@ -27,6 +27,7 @@ public:
   void UnBind() const;
 
   void SetUniform1i(const std::string& name, int value);
+  void SetUniformia(const std::string& name, int value[2]);
   void SetUniform1f(const std::string& name, float value);
   // set uniform
   void SetUniform4f(const std::string& name, float x, float y, float z, float w);

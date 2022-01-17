@@ -19,6 +19,7 @@
 
 #include "test/TestClearColor.h"
 #include "test/TestTexture2D.h"
+#include "test/TestBatchRendering.h"
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) 
 {
@@ -84,6 +85,7 @@ int main(void)
 
 		testMenu->RegisterTest<test::TestClearColor>("Clear Color");
     testMenu->RegisterTest<test::TestTexture2D>("2D Texture");
+    testMenu->RegisterTest<test::TestBatchRendering>("Batch Rendering");
 
 		/* Loop until the user closes the window */
 		while (!glfwWindowShouldClose(window))
